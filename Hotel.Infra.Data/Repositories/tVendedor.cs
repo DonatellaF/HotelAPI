@@ -7,28 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotel.Infra.Data
+namespace Hotel.Infra.Data.Repositories
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tHabitacion
+    public partial class tVendedor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tHabitacion()
+        public tVendedor()
         {
             this.tAlquiler = new HashSet<tAlquiler>();
         }
     
-        public int IdHabitacion { get; set; }
-        public Nullable<int> numeroCamas { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<decimal> precio { get; set; }
-        public string fkTipo { get; set; }
+        public string idVendedor { get; set; }
+        public string nombre { get; set; }
+        public string direccion { get; set; }
+        public string telefono { get; set; }
         public string observacion { get; set; }
+        public Nullable<decimal> sueldo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tAlquiler> tAlquiler { get; set; }
-        public virtual tTipo tTipo { get; set; }
     }
 }

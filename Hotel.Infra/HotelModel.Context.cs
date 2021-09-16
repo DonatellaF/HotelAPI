@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotel.Infra.Data
+namespace Hotel.Infra
 {
     using System;
     using System.Data.Entity;
@@ -25,7 +25,6 @@ namespace Hotel.Infra.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tCliente> tCliente { get; set; }
         public virtual DbSet<tHabitacion> tHabitacion { get; set; }
         public virtual DbSet<tTipo> tTipo { get; set; }

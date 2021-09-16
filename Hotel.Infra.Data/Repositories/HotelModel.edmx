@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bdHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'bdHotel.dbo.tAlquiler' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tAlquiler">
+          <Key>
+            <PropertyRef Name="idAlquiler" />
+          </Key>
+          <Property Name="idAlquiler" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="precio" Type="money" />
+          <Property Name="fechaEntrada" Type="datetime" />
+          <Property Name="fechaSalida" Type="datetime" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+          <Property Name="observacion" Type="text" />
+          <Property Name="fkVendedor" Type="char" MaxLength="4" />
+          <Property Name="fkCliente" Type="int" />
+          <Property Name="fkHabitacion" Type="int" />
+        </EntityType>
+        <EntityType Name="tCliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documento" Type="varchar" MaxLength="12" />
+          <Property Name="nombre" Type="varchar(max)" />
+          <Property Name="fechaNacimiento" Type="datetime" />
+          <Property Name="lugarNacimiento" Type="varchar(max)" />
+          <Property Name="sexo" Type="char" MaxLength="1" />
+          <Property Name="observacion" Type="text" />
+        </EntityType>
+        <EntityType Name="tHabitacion">
+          <Key>
+            <PropertyRef Name="IdHabitacion" />
+          </Key>
+          <Property Name="IdHabitacion" Type="int" Nullable="false" />
+          <Property Name="numeroCamas" Type="int" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="precio" Type="money" />
+          <Property Name="fkTipo" Type="char" MaxLength="4" />
+          <Property Name="observacion" Type="text" />
+        </EntityType>
+        <EntityType Name="tTipo">
+          <Key>
+            <PropertyRef Name="idTipo" />
+          </Key>
+          <Property Name="idTipo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tVendedor">
+          <Key>
+            <PropertyRef Name="idVendedor" />
+          </Key>
+          <Property Name="idVendedor" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" />
+          <Property Name="direccion" Type="varchar(max)" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="observacion" Type="text" />
+          <Property Name="sueldo" Type="money" />
+        </EntityType>
+        <Association Name="FK__tAlquiler__fkCli__52593CB8">
+          <End Role="tCliente" Type="Self.tCliente" Multiplicity="0..1" />
+          <End Role="tAlquiler" Type="Self.tAlquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tAlquiler">
+              <PropertyRef Name="fkCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tAlquiler__fkHab__5165187F">
+          <End Role="tHabitacion" Type="Self.tHabitacion" Multiplicity="0..1" />
+          <End Role="tAlquiler" Type="Self.tAlquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHabitacion">
+              <PropertyRef Name="IdHabitacion" />
+            </Principal>
+            <Dependent Role="tAlquiler">
+              <PropertyRef Name="fkHabitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tAlquiler__fkVen__534D60F1">
+          <End Role="tVendedor" Type="Self.tVendedor" Multiplicity="0..1" />
+          <End Role="tAlquiler" Type="Self.tAlquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tVendedor">
+              <PropertyRef Name="idVendedor" />
+            </Principal>
+            <Dependent Role="tAlquiler">
+              <PropertyRef Name="fkVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tHabitaci__fkTip__4F7CD00D">
+          <End Role="tTipo" Type="Self.tTipo" Multiplicity="0..1" />
+          <End Role="tHabitacion" Type="Self.tHabitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tTipo">
+              <PropertyRef Name="idTipo" />
+            </Principal>
+            <Dependent Role="tHabitacion">
+              <PropertyRef Name="fkTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdHotelModelStoreContainer">
+          <EntitySet Name="tCliente" EntityType="Self.tCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tHabitacion" EntityType="Self.tHabitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tTipo" EntityType="Self.tTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tVendedor" EntityType="Self.tVendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAlquiler" EntityType="Self.tAlquiler" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tAlquiler].[idAlquiler] AS [idAlquiler], 
+    [tAlquiler].[precio] AS [precio], 
+    [tAlquiler].[fechaEntrada] AS [fechaEntrada], 
+    [tAlquiler].[fechaSalida] AS [fechaSalida], 
+    [tAlquiler].[estado] AS [estado], 
+    [tAlquiler].[observacion] AS [observacion], 
+    [tAlquiler].[fkVendedor] AS [fkVendedor], 
+    [tAlquiler].[fkCliente] AS [fkCliente], 
+    [tAlquiler].[fkHabitacion] AS [fkHabitacion]
+    FROM [dbo].[tAlquiler] AS [tAlquiler]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tAlquiler__fkCli__52593CB8" Association="Self.FK__tAlquiler__fkCli__52593CB8">
+            <End Role="tCliente" EntitySet="tCliente" />
+            <End Role="tAlquiler" EntitySet="tAlquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tAlquiler__fkHab__5165187F" Association="Self.FK__tAlquiler__fkHab__5165187F">
+            <End Role="tHabitacion" EntitySet="tHabitacion" />
+            <End Role="tAlquiler" EntitySet="tAlquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tAlquiler__fkVen__534D60F1" Association="Self.FK__tAlquiler__fkVen__534D60F1">
+            <End Role="tVendedor" EntitySet="tVendedor" />
+            <End Role="tAlquiler" EntitySet="tAlquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tHabitaci__fkTip__4F7CD00D" Association="Self.FK__tHabitaci__fkTip__4F7CD00D">
+            <End Role="tTipo" EntitySet="tTipo" />
+            <End Role="tHabitacion" EntitySet="tHabitacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdHotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tCliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documento" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="lugarNacimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tAlquiler" Relationship="Self.FK__tAlquiler__fkCli__52593CB8" FromRole="tCliente" ToRole="tAlquiler" />
+        </EntityType>
+        <EntityType Name="tHabitacion">
+          <Key>
+            <PropertyRef Name="IdHabitacion" />
+          </Key>
+          <Property Name="IdHabitacion" Type="Int32" Nullable="false" />
+          <Property Name="numeroCamas" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fkTipo" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tAlquiler" Relationship="Self.FK__tAlquiler__fkHab__5165187F" FromRole="tHabitacion" ToRole="tAlquiler" />
+          <NavigationProperty Name="tTipo" Relationship="Self.FK__tHabitaci__fkTip__4F7CD00D" FromRole="tHabitacion" ToRole="tTipo" />
+        </EntityType>
+        <EntityType Name="tTipo">
+          <Key>
+            <PropertyRef Name="idTipo" />
+          </Key>
+          <Property Name="idTipo" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tHabitacion" Relationship="Self.FK__tHabitaci__fkTip__4F7CD00D" FromRole="tTipo" ToRole="tHabitacion" />
+        </EntityType>
+        <EntityType Name="tVendedor">
+          <Key>
+            <PropertyRef Name="idVendedor" />
+          </Key>
+          <Property Name="idVendedor" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sueldo" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="tAlquiler" Relationship="Self.FK__tAlquiler__fkVen__534D60F1" FromRole="tVendedor" ToRole="tAlquiler" />
+        </EntityType>
+        <EntityType Name="tAlquiler">
+          <Key>
+            <PropertyRef Name="idAlquiler" />
+          </Key>
+          <Property Name="idAlquiler" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fechaEntrada" Type="DateTime" Precision="3" />
+          <Property Name="fechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fkVendedor" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="fkCliente" Type="Int32" />
+          <Property Name="fkHabitacion" Type="Int32" />
+          <NavigationProperty Name="tCliente" Relationship="Self.FK__tAlquiler__fkCli__52593CB8" FromRole="tAlquiler" ToRole="tCliente" />
+          <NavigationProperty Name="tHabitacion" Relationship="Self.FK__tAlquiler__fkHab__5165187F" FromRole="tAlquiler" ToRole="tHabitacion" />
+          <NavigationProperty Name="tVendedor" Relationship="Self.FK__tAlquiler__fkVen__534D60F1" FromRole="tAlquiler" ToRole="tVendedor" />
+        </EntityType>
+        <Association Name="FK__tAlquiler__fkCli__52593CB8">
+          <End Role="tCliente" Type="Self.tCliente" Multiplicity="0..1" />
+          <End Role="tAlquiler" Type="Self.tAlquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tAlquiler">
+              <PropertyRef Name="fkCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tAlquiler__fkHab__5165187F">
+          <End Role="tHabitacion" Type="Self.tHabitacion" Multiplicity="0..1" />
+          <End Role="tAlquiler" Type="Self.tAlquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHabitacion">
+              <PropertyRef Name="IdHabitacion" />
+            </Principal>
+            <Dependent Role="tAlquiler">
+              <PropertyRef Name="fkHabitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tHabitaci__fkTip__4F7CD00D">
+          <End Role="tTipo" Type="Self.tTipo" Multiplicity="0..1" />
+          <End Role="tHabitacion" Type="Self.tHabitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tTipo">
+              <PropertyRef Name="idTipo" />
+            </Principal>
+            <Dependent Role="tHabitacion">
+              <PropertyRef Name="fkTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tAlquiler__fkVen__534D60F1">
+          <End Role="tVendedor" Type="Self.tVendedor" Multiplicity="0..1" />
+          <End Role="tAlquiler" Type="Self.tAlquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tVendedor">
+              <PropertyRef Name="idVendedor" />
+            </Principal>
+            <Dependent Role="tAlquiler">
+              <PropertyRef Name="fkVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdHotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tCliente" EntityType="Self.tCliente" />
+          <EntitySet Name="tHabitacion" EntityType="Self.tHabitacion" />
+          <EntitySet Name="tTipo" EntityType="Self.tTipo" />
+          <EntitySet Name="tVendedor" EntityType="Self.tVendedor" />
+          <EntitySet Name="tAlquiler" EntityType="Self.tAlquiler" />
+          <AssociationSet Name="FK__tAlquiler__fkCli__52593CB8" Association="Self.FK__tAlquiler__fkCli__52593CB8">
+            <End Role="tCliente" EntitySet="tCliente" />
+            <End Role="tAlquiler" EntitySet="tAlquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tAlquiler__fkHab__5165187F" Association="Self.FK__tAlquiler__fkHab__5165187F">
+            <End Role="tHabitacion" EntitySet="tHabitacion" />
+            <End Role="tAlquiler" EntitySet="tAlquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tHabitaci__fkTip__4F7CD00D" Association="Self.FK__tHabitaci__fkTip__4F7CD00D">
+            <End Role="tTipo" EntitySet="tTipo" />
+            <End Role="tHabitacion" EntitySet="tHabitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tAlquiler__fkVen__534D60F1" Association="Self.FK__tAlquiler__fkVen__534D60F1">
+            <End Role="tVendedor" EntitySet="tVendedor" />
+            <End Role="tAlquiler" EntitySet="tAlquiler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdHotelModelStoreContainer" CdmEntityContainer="bdHotelEntities">
+          <EntitySetMapping Name="tCliente">
+            <EntityTypeMapping TypeName="bdHotelModel.tCliente">
+              <MappingFragment StoreEntitySet="tCliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="lugarNacimiento" ColumnName="lugarNacimiento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tHabitacion">
+            <EntityTypeMapping TypeName="bdHotelModel.tHabitacion">
+              <MappingFragment StoreEntitySet="tHabitacion">
+                <ScalarProperty Name="IdHabitacion" ColumnName="IdHabitacion" />
+                <ScalarProperty Name="numeroCamas" ColumnName="numeroCamas" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="fkTipo" ColumnName="fkTipo" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTipo">
+            <EntityTypeMapping TypeName="bdHotelModel.tTipo">
+              <MappingFragment StoreEntitySet="tTipo">
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tVendedor">
+            <EntityTypeMapping TypeName="bdHotelModel.tVendedor">
+              <MappingFragment StoreEntitySet="tVendedor">
+                <ScalarProperty Name="idVendedor" ColumnName="idVendedor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="sueldo" ColumnName="sueldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tAlquiler">
+            <EntityTypeMapping TypeName="bdHotelModel.tAlquiler">
+              <MappingFragment StoreEntitySet="tAlquiler">
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="fechaEntrada" ColumnName="fechaEntrada" />
+                <ScalarProperty Name="fechaSalida" ColumnName="fechaSalida" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fkVendedor" ColumnName="fkVendedor" />
+                <ScalarProperty Name="fkCliente" ColumnName="fkCliente" />
+                <ScalarProperty Name="fkHabitacion" ColumnName="fkHabitacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

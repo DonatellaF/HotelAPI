@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hotel.API
+namespace Hotel.Infra
 {
     public class Class1
     {

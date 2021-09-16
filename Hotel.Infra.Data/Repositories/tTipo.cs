@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotel.Infra.Data
+namespace Hotel.Infra.Data.Repositories
 {
     using System;
     using System.Collections.Generic;

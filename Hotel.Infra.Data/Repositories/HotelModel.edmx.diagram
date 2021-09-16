@@ -4,12 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a5de41fa4a69492f92d1413561b8e69a" Name="Diagram1">
-        <EntityTypeShape EntityType="bdHotelModel.sysdiagrams" Width="1.5" PointX="10.125" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdHotelModel.tCliente" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+      <Diagram DiagramId="808f631bc23e48caa50837523e6378f5" Name="Diagram1">
+        <EntityTypeShape EntityType="bdHotelModel.tCliente" Width="1.5" PointX="8.5" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="bdHotelModel.tHabitacion" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="bdHotelModel.tTipo" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdHotelModel.tVendedor" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdHotelModel.tVendedor" Width="1.5" PointX="4.875" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bdHotelModel.tAlquiler" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="bdHotelModel.FK__tAlquiler__fkCli__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="bdHotelModel.FK__tAlquiler__fkHab__5165187F" ManuallyRouted="false" />

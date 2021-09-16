@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel.API;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace Presentation
 {
     public partial class Hotel : Form
     {
+        public HotelController hotel { get; set; }
         public Hotel()
         {
             InitializeComponent();
+            hotel = new HotelController();
+        }
+
+        private void Hotel_Load(object sender, EventArgs e)
+        {
+            this.txtNombreValue.Text = hotel.GetCliente();
         }
     }
 }

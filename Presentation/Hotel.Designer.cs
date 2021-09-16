@@ -28,13 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.txtNombre = new System.Windows.Forms.Label();
+            this.txtNombreValue = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.AutoSize = true;
+            this.txtNombre.Location = new System.Drawing.Point(23, 42);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(47, 13);
+            this.txtNombre.TabIndex = 0;
+            this.txtNombre.Text = "Nombre:";
+            // 
+            // txtNombreValue
+            // 
+            this.txtNombreValue.AutoSize = true;
+            this.txtNombreValue.Location = new System.Drawing.Point(76, 42);
+            this.txtNombreValue.Name = "txtNombreValue";
+            this.txtNombreValue.Size = new System.Drawing.Size(35, 13);
+            this.txtNombreValue.TabIndex = 1;
+            this.txtNombreValue.Text = "label2";
+            // 
+            // Hotel
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(472, 450);
+            this.Controls.Add(this.txtNombreValue);
+            this.Controls.Add(this.txtNombre);
+            this.Name = "Hotel";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Hotel_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label txtNombre;
+        private System.Windows.Forms.Label txtNombreValue;
     }
 }
 

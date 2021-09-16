@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Controllers\HotelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -49,9 +49,9 @@
       <Project>{8801e85f-3b61-465e-b10a-e846e7e3a46f}</Project>
       <Name>Hotel.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hotel.Infra.Data\Hotel.Infra.Data.csproj">
-      <Project>{859fe62f-5e48-44ea-9fc4-06854372cbbc}</Project>
-      <Name>Hotel.Infra.Data</Name>
+    <ProjectReference Include="..\Hotel.Infra\Hotel.Infra.csproj">
+      <Project>{4014b78f-a098-4554-b433-1225deebd1c9}</Project>
+      <Name>Hotel.Infra</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
