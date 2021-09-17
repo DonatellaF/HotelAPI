@@ -41,17 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Alquiler.cs" />
+    <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Habitacion.cs" />
+    <Compile Include="Entities\Tipo.cs" />
+    <Compile Include="Entities\Vendedor.cs" />
+    <Compile Include="Interfaces\RepositoriesInterface\IHotelRepository.cs" />
+    <Compile Include="Interfaces\ServicesInterfaces\IHotelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HotelService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Hotel.Infra\Hotel.Infra.csproj">
-      <Project>{4014b78f-a098-4554-b433-1225deebd1c9}</Project>
-      <Name>Hotel.Infra</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

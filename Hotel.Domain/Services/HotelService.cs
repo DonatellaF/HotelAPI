@@ -1,4 +1,5 @@
-﻿using Hotel.Infra.Repositories;
+﻿using Hotel.Domain.Interfaces.RepositoriesInterface;
+using Hotel.Domain.Interfaces.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Hotel.Domain.Services
 {
-    public class HotelService
+    public class HotelService : IHotelService
     {
-        public HotelRespository hotelRespository { get; set; }
-        public HotelService()
+        public IHotelRepository _hotelRepository;
+        public HotelService(IHotelRepository hotelRepository)
         {
-            hotelRespository = new HotelRespository();
+            _hotelRepository = hotelRepository;
         }
 
         public string GetCliente()
         {
-            return hotelRespository.GetCliente();
+            return _hotelRepository.GetCliente();
         }
     }
 }

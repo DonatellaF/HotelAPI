@@ -1,4 +1,4 @@
-﻿using Hotel.API;
+﻿using Hotel.Domain.Interfaces.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,16 +13,16 @@ namespace Presentation
 {
     public partial class Hotel : Form
     {
-        public HotelController hotel { get; set; }
-        public Hotel()
+        public IHotelService _hotelService;
+        public Hotel(IHotelService hotelService)
         {
             InitializeComponent();
-            hotel = new HotelController();
+            _hotelService = hotelService;
         }
 
         private void Hotel_Load(object sender, EventArgs e)
         {
-            this.txtNombreValue.Text = hotel.GetCliente();
+            this.txtNombreValue.Text = _hotelService.GetCliente();
         }
     }
 }
